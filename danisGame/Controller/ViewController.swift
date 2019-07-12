@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         
         alert.addTextField { (textField) in
             textField.placeholder = "Name"
+            textField.autocapitalizationType = .words
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {[weak alert]
@@ -50,6 +51,9 @@ class ViewController: UIViewController {
             let player = Player(entity: entity, insertInto: managedContext)
             
             player.name = alert?.textFields![0].text
+            if player.name == "Daniel"{
+                player.name = "Bitch ass"
+            }
             player.questions = 0
             player.sesion = 0
             questionsGlobal.instance.players.append(player)
