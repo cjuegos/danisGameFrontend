@@ -17,9 +17,8 @@ class gameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        questionsGlobal.instance.getAllQuestions()
-        questionsGlobal.instance.randomQuestion()
         setView()
+        print(questionsGlobal.instance.players.count)
     }
     
     func setView(){

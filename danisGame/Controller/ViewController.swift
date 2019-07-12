@@ -107,6 +107,8 @@ class ViewController: UIViewController {
                 question.text = i.text
                 appDelegate.saveContext()
                 }
+            questionsGlobal.instance.getAllQuestions()
+            questionsGlobal.instance.randomQuestion()
             }
         }
     }
