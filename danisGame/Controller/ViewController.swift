@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             textField.placeholder = "Name"
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {[weak alert]
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: {[weak alert]
             (_) in
             alert?.dismiss(animated: true, completion: nil)
         }))
@@ -55,13 +55,21 @@ class ViewController: UIViewController {
             player.sesion = 0
             self.players.append(player)
             self.tableView.reloadData()
-            print(33)
-            print(self.players.count)
+            alert?.textFields![0].text = ""
         }))
+
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem?.tintColor = .black
         
-        loadQUestions()
+        loadQuestions()
         applyDesign()
     }
+    
+    override func viewWillAppear(_ animated: Bool){
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.78, green:0.57, blue:0.00, alpha:1.0)
+        super.viewWillAppear(animated)
+    }
+    
     func applyDesign(){
         playButton.backgroundColor = UIColor.white
         playButton.layer.cornerRadius = playButton.frame.height/2
@@ -72,7 +80,7 @@ class ViewController: UIViewController {
         playButton.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
-    func loadQUestions(){
+    func loadQuestions(){
         API.getAllQUestions{ questions in
             self.downloadedQUestions = questions
             
@@ -98,7 +106,6 @@ class ViewController: UIViewController {
                 question.text = i.text
                 appDelegate.saveContext()
             }
-
         }
     }
     
@@ -132,6 +139,26 @@ class ViewController: UIViewController {
         appDelegate.saveContext()
         }
     }
+    
+    @IBAction func refresh(_ sender: Any) {
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "NormalQuestion")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
+        }
+        
+        players = [Player]()
+        loadQuestions()
+        self.tableView.reloadData()
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
@@ -156,11 +183,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete"){
             (action, indexPath) in
+            self.players.remove(at: indexPath.row)
+            tableView.reloadData()
         }
         
-        deleteAction.backgroundColor = .red
+        deleteAction.backgroundColor = UIColor.init(displayP3Red: 1.00, green: 0.34, blue: 0.13, alpha: 1.0)
         
         return [deleteAction]
     }
+    
     
 }

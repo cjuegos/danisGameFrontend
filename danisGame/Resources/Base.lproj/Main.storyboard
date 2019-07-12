@@ -26,7 +26,7 @@
                                 </constraints>
                                 <state key="normal" title="Go!"/>
                                 <connections>
-                                    <segue destination="uDf-Gj-MP4" kind="presentation" id="VnW-qm-emk"/>
+                                    <segue destination="uDf-Gj-MP4" kind="push" id="VnW-qm-emk"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8gy-dI-k8e">
@@ -77,6 +77,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dani's Game" id="BzB-ng-Ccb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="g5S-Fj-l4C">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="refresh:" destination="BYZ-38-t0r" id="0P0-mI-gJC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hmJ-Y1-qdJ">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -93,31 +99,35 @@
             </objects>
             <point key="canvasLocation" x="1014" y="27"/>
         </scene>
-        <!--View Controller-->
+        <!--Game Controller-->
         <scene sceneID="2cE-I6-WrP">
             <objects>
-                <viewController id="uDf-Gj-MP4" sceneMemberID="viewController">
+                <viewController id="uDf-Gj-MP4" customClass="gameController" customModule="danisGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ULX-gQ-LYD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WC-0W-cR8">
-                                <rect key="frame" x="32" y="605" width="311" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="112.5" y="585" width="150" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jfg-iY-GmF"/>
+                                    <constraint firstAttribute="width" constant="150" id="t4C-Bs-vCL"/>
+                                </constraints>
+                                <state key="normal" title="Next"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Kal-xw-wX8" firstAttribute="bottom" secondItem="0WC-0W-cR8" secondAttribute="bottom" constant="32" id="2Fp-JD-nSz"/>
-                            <constraint firstItem="Kal-xw-wX8" firstAttribute="trailing" secondItem="0WC-0W-cR8" secondAttribute="trailing" constant="32" id="5wC-gZ-XZm"/>
-                            <constraint firstItem="0WC-0W-cR8" firstAttribute="leading" secondItem="Kal-xw-wX8" secondAttribute="leading" constant="32" id="qaa-Ir-I3e"/>
+                            <constraint firstItem="0WC-0W-cR8" firstAttribute="centerX" secondItem="ULX-gQ-LYD" secondAttribute="centerX" id="PtG-Io-rga"/>
+                            <constraint firstItem="Kal-xw-wX8" firstAttribute="bottom" secondItem="0WC-0W-cR8" secondAttribute="bottom" constant="32" id="yuW-b9-OMp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kal-xw-wX8"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ea5-gh-s6K"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aey-aB-Wkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="27"/>
+            <point key="canvasLocation" x="1796" y="26.53673163418291"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eqb-MO-I5Z">
