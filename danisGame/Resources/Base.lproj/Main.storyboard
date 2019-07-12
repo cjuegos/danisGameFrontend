@@ -115,15 +115,26 @@
                                 </constraints>
                                 <state key="normal" title="Next"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haf-IJ-seI">
+                                <rect key="frame" x="166.5" y="323" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.75686274509999996" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0WC-0W-cR8" firstAttribute="centerX" secondItem="ULX-gQ-LYD" secondAttribute="centerX" id="PtG-Io-rga"/>
+                            <constraint firstItem="Haf-IJ-seI" firstAttribute="centerY" secondItem="ULX-gQ-LYD" secondAttribute="centerY" id="kLI-rt-lQ8"/>
+                            <constraint firstItem="Haf-IJ-seI" firstAttribute="centerX" secondItem="ULX-gQ-LYD" secondAttribute="centerX" id="pY9-sb-sed"/>
                             <constraint firstItem="Kal-xw-wX8" firstAttribute="bottom" secondItem="0WC-0W-cR8" secondAttribute="bottom" constant="32" id="yuW-b9-OMp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kal-xw-wX8"/>
                     </view>
                     <navigationItem key="navigationItem" id="ea5-gh-s6K"/>
+                    <connections>
+                        <outlet property="questionTextLabel" destination="Haf-IJ-seI" id="hT1-CH-BIi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aey-aB-Wkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

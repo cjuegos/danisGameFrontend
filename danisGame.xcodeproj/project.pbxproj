@@ -19,6 +19,7 @@
 		F41E1E5922D7E68600F9E80E /* SesionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E1E5822D7E68600F9E80E /* SesionAPI.swift */; };
 		F41E1ED522D7F34C00F9E80E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F41E1EC822D7F34500F9E80E /* Alamofire.framework */; };
 		F41E1ED622D7F34C00F9E80E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F41E1EC822D7F34500F9E80E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F49410B022D88503007B502F /* questionsGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49410AF22D88503007B502F /* questionsGlobal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		F41E1E5422D7E4A300F9E80E /* NormalQuestionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalQuestionAPI.swift; sourceTree = "<group>"; };
 		F41E1E5822D7E68600F9E80E /* SesionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesionAPI.swift; sourceTree = "<group>"; };
 		F41E1EBC22D7F34500F9E80E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "../../../../Desktop/Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
+		F49410AF22D88503007B502F /* questionsGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionsGlobal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				F41E1DEC22D5E2E100F9E80E /* danisGame.xcdatamodeld */,
 				F41E1E5422D7E4A300F9E80E /* NormalQuestionAPI.swift */,
 				F41E1E5822D7E68600F9E80E /* SesionAPI.swift */,
+				F49410AF22D88503007B502F /* questionsGlobal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				F41E1DE822D5E2E100F9E80E /* ViewController.swift in Sources */,
 				F41E1E5922D7E68600F9E80E /* SesionAPI.swift in Sources */,
 				F41E1DEE22D5E2E100F9E80E /* danisGame.xcdatamodeld in Sources */,
+				F49410B022D88503007B502F /* questionsGlobal.swift in Sources */,
 				F41E1E5522D7E4A300F9E80E /* NormalQuestionAPI.swift in Sources */,
 				F41E1E5322D7DC7200F9E80E /* API.swift in Sources */,
 				F41E1DE622D5E2E100F9E80E /* AppDelegate.swift in Sources */,
