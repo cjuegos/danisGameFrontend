@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     let alert = UIAlertController(title: "Player", message: nil, preferredStyle: .alert)
     
     var downloadedQUestions : [NormalQuestionAPI] = [NormalQuestionAPI]()
-    var players : [Player] = [Player]()
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +23,7 @@ class ViewController: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
+        
         alert.addTextField { (textField) in
             textField.placeholder = "Name"
         }
@@ -53,7 +52,7 @@ class ViewController: UIViewController {
             player.name = alert?.textFields![0].text
             player.questions = 0
             player.sesion = 0
-            self.players.append(player)
+            questionsGlobal.instance.players.append(player)
             self.tableView.reloadData()
             alert?.textFields![0].text = ""
         }))
@@ -81,6 +80,8 @@ class ViewController: UIViewController {
     }
     
     func loadQuestions(){
+        questionsGlobal.instance.getAllQuestions()
+        if questionsGlobal.instance.questions.count <= 0{
         API.getAllQUestions{ questions in
             self.downloadedQUestions = questions
             
@@ -105,6 +106,7 @@ class ViewController: UIViewController {
                 question.type = i.type
                 question.text = i.text
                 appDelegate.saveContext()
+                }
             }
         }
     }
@@ -113,32 +115,6 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func savePlayers(){
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        // 1
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        for i in players{
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Player",
-                                       in: managedContext)!
-        
-        let player = Player(entity: entity,
-                            insertInto: managedContext)
-        
-            player.name = i.name
-            player.questions = i.questions
-            player.sesion = i.sesion
-            appDelegate.saveContext()
-            
-
-        appDelegate.saveContext()
-        }
-    }
     
     @IBAction func refresh(_ sender: Any) {
         
@@ -154,16 +130,17 @@ class ViewController: UIViewController {
         } catch {
             print ("There was an error")
         }
-        
-        players = [Player]()
+
+        questionsGlobal.instance.players = [Player]()
         loadQuestions()
         self.tableView.reloadData()
     }
+
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players.count
+        return questionsGlobal.instance.players.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -171,7 +148,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.accessoryType = .none
         
-        let player = players[indexPath.row]
+        let player = questionsGlobal.instance.players[indexPath.row]
         
         cell.textLabel?.text = player.name
         
@@ -179,11 +156,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let player = players[indexPath.row]
+        let player = questionsGlobal.instance.players[indexPath.row]
         
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete"){
             (action, indexPath) in
-            self.players.remove(at: indexPath.row)
+            questionsGlobal.instance.players.remove(at: indexPath.row)
             tableView.reloadData()
         }
         
@@ -191,6 +168,4 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         
         return [deleteAction]
     }
-    
-    
 }

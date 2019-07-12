@@ -13,8 +13,13 @@ import CoreData
 class questionsGlobal{
     static let instance = questionsGlobal()
     
+    var index: Int = 0
+    var indexPlayer: Int = 0
     var currentQuestion : NormalQuestion = NormalQuestion()
     var questions: [NormalQuestion] = [NormalQuestion]()
+    
+    var currentPlayer : Player = Player()
+    var players: [Player] = [Player]()
     
     func getAllQuestions(){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
@@ -31,5 +36,24 @@ class questionsGlobal{
         }catch let error as NSError{
             print("ERROR: \(error)")
         }
+        
+        print(questionsGlobal.instance.questions.count)
+    }
+    
+    func randomQuestion(){
+        index = Int.random(in: 0 ..< questionsGlobal.instance.questions.count)
+        
+        questionsGlobal.instance.currentQuestion = questionsGlobal.instance.questions[index]
+    }
+    
+    func randomPlayer(){
+        index = Int.random(in: 0 ..< questionsGlobal.instance.players.count)
+        
+        questionsGlobal.instance.currentPlayer = questionsGlobal.instance.players[index]
+    }
+    
+    func popQuestion()
+    {
+        questionsGlobal.instance.questions.remove(at: index)
     }
 }
