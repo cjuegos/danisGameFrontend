@@ -10,24 +10,32 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
-    
-    //1. Create the alert controller.
+
     let alert = UIAlertController(title: "Player", message: nil, preferredStyle: .alert)
     
     var downloadedQUestions : [NormalQuestionAPI] = [NormalQuestionAPI]()
+    var players : [Player] = [Player]()
+    
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        //2. Add the text field. You can configure it however you need.
+
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
         alert.addTextField { (textField) in
             textField.placeholder = "Name"
         }
         
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {[weak alert]
+            (_) in
+            alert?.dismiss(animated: true, completion: nil)
+        }))
+
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak alert] (_) in
+            
             guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
                     return
@@ -40,13 +48,15 @@ class ViewController: UIViewController {
                 NSEntityDescription.entity(forEntityName: "Player",
                                            in: managedContext)!
             
-            let player = Player(entity: entity,
-                                          insertInto: managedContext)
+            let player = Player(entity: entity, insertInto: managedContext)
             
             player.name = alert?.textFields![0].text
             player.questions = 0
             player.sesion = 0
-            appDelegate.saveContext()
+            self.players.append(player)
+            self.tableView.reloadData()
+            print(33)
+            print(self.players.count)
         }))
         
         loadQUestions()
@@ -96,8 +106,61 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func loadtable(){
+    func savePlayers(){
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        // 1
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
         
+        for i in players{
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Player",
+                                       in: managedContext)!
+        
+        let player = Player(entity: entity,
+                            insertInto: managedContext)
+        
+            player.name = i.name
+            player.questions = i.questions
+            player.sesion = i.sesion
+            appDelegate.saveContext()
+            
+
+        appDelegate.saveContext()
+        }
     }
 }
 
+extension ViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return players.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell", for: indexPath)
+        
+        cell.accessoryType = .none
+        
+        let player = players[indexPath.row]
+        
+        cell.textLabel?.text = player.name
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let player = players[indexPath.row]
+        
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete"){
+            (action, indexPath) in
+        }
+        
+        deleteAction.backgroundColor = .red
+        
+        return [deleteAction]
+    }
+    
+}
