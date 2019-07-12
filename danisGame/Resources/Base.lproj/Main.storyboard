@@ -77,6 +77,9 @@
                     <navigationItem key="navigationItem" title="Dani's Game" id="BzB-ng-Ccb">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hmJ-Y1-qdJ">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addPlayer:" destination="BYZ-38-t0r" id="7LE-te-13P"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
