@@ -59,7 +59,7 @@
                                 </constraints>
                                 <state key="normal" title="Go!"/>
                                 <connections>
-                                    <segue destination="uDf-Gj-MP4" kind="show" id="IdG-Hf-Xn2"/>
+                                    <action selector="pressGo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bGt-MP-1nA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -93,6 +93,7 @@
                     <connections>
                         <outlet property="playButton" destination="bW5-2b-QZ4" id="fa2-3l-Md9"/>
                         <outlet property="tableView" destination="8gy-dI-k8e" id="VzJ-99-8Mf"/>
+                        <segue destination="uDf-Gj-MP4" kind="show" identifier="playGame" id="OoO-MI-YFo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

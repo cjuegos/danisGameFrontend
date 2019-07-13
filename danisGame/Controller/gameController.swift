@@ -23,7 +23,6 @@ class gameController: UIViewController {
     
     func setView(){
         typeTextLabel.text = questionsGlobal.instance.currentQuestion.type
-        
         if questionsGlobal.instance.currentQuestion.type == "Game"
         {
             self.navigationController?.navigationBar.barTintColor = UIColor(red:0.78, green:0.57, blue:0.00, alpha:1.0)

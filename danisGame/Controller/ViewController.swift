@@ -86,6 +86,7 @@ class ViewController: UIViewController {
     func loadQuestions(){
         questionsGlobal.instance.getAllQuestions()
         if questionsGlobal.instance.questions.count <= 0{
+            print("entro")
         API.getAllQUestions{ questions in
             self.downloadedQUestions = questions
             
@@ -115,6 +116,9 @@ class ViewController: UIViewController {
             questionsGlobal.instance.randomQuestion()
             }
         }
+        else{
+            questionsGlobal.instance.randomQuestion()
+        }
     }
     
     @IBAction func addPlayer(_ sender: UIBarButtonItem) {
@@ -141,7 +145,31 @@ class ViewController: UIViewController {
         loadQuestions()
         self.tableView.reloadData()
     }
-
+    
+    @IBAction func pressGo(_ sender: UIButton) {
+        
+        if questionsGlobal.instance.questions.count > 0 && questionsGlobal.instance.players.count > 0{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "playGame", sender: self)
+            }
+        }
+        else{
+            if questionsGlobal.instance.questions.count <= 0{
+                 self.showAlert(with: "Wait", message: "Questions are loading")
+            }
+            if questionsGlobal.instance.players.count <= 0{
+                self.showAlert(with: "Wait", message: "You need to add at least one player")
+            }
+        }
+    }
+    
+    
+    func showAlert(with title: String?, message: String?){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
